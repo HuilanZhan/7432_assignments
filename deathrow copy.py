@@ -12,10 +12,12 @@ soup = BeautifulSoup(html,"html.parser")
 
 table = soup.find("table", {"class": "tdcj_table indent"})
 
-for tr in table.find_all("tr"):
+row_list = table.find_all("tr")
 
-		td_list = tr.find_all("td")
+for row in row_list:
 
-		data = [cell.text for cell in cell_list]
+		cell_list = row.find_all("td")
+
+		data = [cell.text.encode("utf-8").strip() for cell in cell_list]
 
 		writer.writerow(data)
